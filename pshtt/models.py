@@ -1,4 +1,7 @@
-from .tracetools import logged
+if __name__ == '__main__':
+    from tracetools import logged
+else:
+    from .tracetools import logged
 
 class Domain:
 
@@ -23,6 +26,17 @@ class Domain:
             'http': self.http.to_object(),
             'httpwww': self.httpwww.to_object()
         }
+
+    def __str__(self):
+        ''' makes this object printable '''
+        return '{}({})'.format(
+            self.__class__.__name__,
+            self.__dict__
+        )
+
+    __repr__ = __str__
+
+
 
 
 class Endpoint:
@@ -111,3 +125,13 @@ class Endpoint:
             obj['hsts_preload'] = self.hsts_preload
 
         return obj
+
+    def __str__(self):
+        ''' makes this object printable '''
+        return '{}({})'.format(
+            self.__class__.__name__,
+            self.__dict__
+        )
+
+    __repr__ = __str__
+
