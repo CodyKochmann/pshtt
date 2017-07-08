@@ -1,6 +1,8 @@
+from .tracetools import logged
 
 class Domain:
 
+    @logged
     def __init__(self, domain):
         self.domain = domain
 
@@ -13,6 +15,7 @@ class Domain:
         # Filled in after analyzing each endpoint.
         self.canonical = None
 
+    @logged
     def to_object(self):
         return {
             'https': self.https.to_object(),
@@ -24,6 +27,7 @@ class Domain:
 
 class Endpoint:
 
+    @logged
     def __init__(self, protocol, host, base_domain):
         # Basic endpoint description
         self.protocol = protocol
@@ -64,6 +68,7 @@ class Endpoint:
         self.hsts_preload = None
         self.hsts_preloaded = None
 
+    @logged
     def url_for(self, protocol, host, base_domain):
         if host == "root":
             prefix = ""
@@ -73,6 +78,7 @@ class Endpoint:
         return "%s://%s%s" % (protocol, prefix, base_domain)
 
     # The fields we want to serialize to JSON.
+    @logged
     def to_object(self):
         obj = {
             'url': self.url,
